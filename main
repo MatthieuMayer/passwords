@@ -7,3 +7,5 @@ parser.add_argument('-l', '--log', help="Prints out elements of the log file", a
 args = parser.parse_args()
 
 def main():
+    root = input("Enter website to log in: \n")
+    
