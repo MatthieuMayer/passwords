@@ -6,7 +6,6 @@ import datetime
 import numpy as np
 
 #-------------------------------------------------------------------------------------------------------------------
-
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--print', help="Prints out resulting password", action='store_true')
 parser.add_argument('-l', '--log', help="Prints out elements of the log file", action='store_true')
@@ -14,7 +13,6 @@ parser.add_argument('url', help="Enter the url to get the password for")
 args = parser.parse_args()
 
 #-------------------------------------------------------------------------------------------------------------------
-
 def url_strip(root):
     """
     Goal: strip the url parameter to the alphabetic characters of the website name only.
@@ -49,7 +47,6 @@ def url_strip(root):
     return root.lower()
 
 #-------------------------------------------------------------------------------------------------------------------
-
 def save_log(seed):
     """
     Goal: save the stripped url name in the json log file (create or update usage time).
@@ -72,7 +69,6 @@ def save_log(seed):
         file.write(json.dumps(dict_log))
 
 #-------------------------------------------------------------------------------------------------------------------        
-
 def print_log():
     """
     Goal: print all key/value pairs stored in the json log file.
@@ -89,8 +85,7 @@ def print_log():
         for k, v in dict_log.items():
             print(k, ':', v)
 
-#-------------------------------------------------------------------------------------------------------------------
-            
+#-------------------------------------------------------------------------------------------------------------------      
 def num_to_alpha(x):
     """
     Goal: convert any number looping on a 26 digits base in its alphabetic analog (e.g. 1 = 'a', 13 = 'm', 28 = 'b').
@@ -116,7 +111,6 @@ def num_to_alpha(x):
     return dict_conv[x]
 
 #-------------------------------------------------------------------------------------------------------------------
-
 def alpha_to_num(s):
     """
     Goal: convert any alphabetic character in its numerical analog (e.g. 'a' = 1, 'm' = 13).
@@ -141,7 +135,6 @@ def alpha_to_num(s):
     return dict_conv[s]
 
 #-------------------------------------------------------------------------------------------------------------------
-
 def create_password(seed):
     """
     Goal: create a password specific to the seed passed as a parameter.
