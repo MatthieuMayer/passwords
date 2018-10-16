@@ -29,7 +29,6 @@ def url_strip(root):
         3- removing all non-alphabetic characters.
 
     :param root: the url to strip to the website name.
-
     :return: the url striped.
     """
     if root.find('//www.') != -1:
@@ -63,7 +62,6 @@ def save_log(seed):
         2- save the updated log dictionary as the json log file.
 
     :param seed: the stripped url name to save or update in the json log file.
-
     :return: none.
     """
     log_file = 'MatthieuMayer/passwords/log.json'             #!! path must be redefined to local file !!
@@ -148,8 +146,8 @@ def create_password(seed):
 
     create_password() is 3 steps process:
         1- convert each letter of the website name to numbers and add them to create the random generator seed ;
-        2- generate one upper case letter, one 5 digits number and one lower case letter
-        3- concatenate these 3 parts with '-' characters to create the password
+        2- generate one upper case letter, one 5 digits number and one lower case letter ;
+        3- concatenate these 3 parts with '-' characters to create the password.
 
     :param seed: the seed to create the password from (in our case the website name).
     :return: the created password specific to the given seed.
