@@ -128,9 +128,9 @@ def alpha_to_num(s):
     ls_alpha = [chr(i) for i in range(ord('a'), ord('z') + 1)]
     ls_numb = [i for i in range(1, 27)]
 
-    tpl_conv = list(zip(ls_alpha, ls_numb))
+    ls_conv = list(zip(ls_alpha, ls_numb))
 
-    dict_conv = dict(tpl_conv)
+    dict_conv = dict(ls_conv)
 
     return dict_conv[s]
 
