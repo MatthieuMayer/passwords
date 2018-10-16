@@ -69,7 +69,7 @@ def save_log(seed):
         file.write(json.dumps(dict_log))
 
 #-------------------------------------------------------------------------------------------------------------------        
-def print_log():
+def display_log():
     """
     Goal: print all key/value pairs stored in the json log file.
     Package(s): json (load()).
@@ -175,7 +175,7 @@ def main():
     print('\n', password, '\n')
 
     if args.log:
-        cfc.print_log()
+        cfc.display_log()
         print('\n')
 
 main()
