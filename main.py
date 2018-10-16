@@ -1,23 +1,26 @@
 #####################################################################################################################
-#       NOTE: all defined functions and the main() function are presented in the same file (main.py) to avoid       #
-#             switching from one file to another when exploring the code.                                           #
+##      NOTE: all defined functions and the main() function are presented in the same file (main.py) to avoid      ##
+##            switching from one file to another when exploring the code.                                          ##
 #####################################################################################################################
 
+#---Packages for main script----------------------------------------------------------------------------------------#
 import argparse
 import os
+
+#---Packages for defined functions----------------------------------------------------------------------------------#
 import csv
 import json
 import datetime
 import numpy as np
 
-#-------------------------------------------------------------------------------------------------------------------
+#---Set argparse environment to manage command-line arguments-------------------------------------------------------#
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--print', help="Prints out resulting password", action='store_true')
 parser.add_argument('-l', '--log', help="Prints out elements of the log file", action='store_true')
 parser.add_argument('url', help="Enter the url to get the password for")
 args = parser.parse_args()
 
-#-------------------------------------------------------------------------------------------------------------------
+#---Defined functions-----------------------------------------------------------------------------------------------#
 def url_strip(root):
     """
     Goal: strip the url parameter to the alphabetic characters of the website name only.
@@ -38,7 +41,7 @@ def url_strip(root):
     if pref in root:
         root = root.split(pref)[1]
     
-    domain_file = 'MatthieuMAYER/passwords/domain_list.csv'     #!! path must be redefined to local file !!
+    domain_file = 'MatthieuMAYER/passwords/domain_list.csv'     # !! path must be redefined to local directory !!
     with open(domain_file, 'r') as file:  
         reader = csv.reader(file)
         for row in reader:
@@ -51,7 +54,7 @@ def url_strip(root):
 
     return root.lower()
 
-#-------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------#
 def save_log(seed):
     """
     Goal: save the stripped url name in the json log file (create or update usage time).
@@ -64,7 +67,7 @@ def save_log(seed):
     :param seed: the stripped url name to save or update in the json log file.
     :return: none.
     """
-    log_file = 'MatthieuMayer/passwords/log.json'             #!! path must be redefined to local file !!
+    log_file = 'MatthieuMayer/passwords/log.json'             # !! path must be redefined to local directory !!
     with open(log_file, 'r') as file:
         dict_log = json.load(file)
         dict_log[seed] = str(datetime.datetime.now())
@@ -72,7 +75,7 @@ def save_log(seed):
     with open(log_file, 'w') as file:
         file.write(json.dumps(dict_log))
 
-#-------------------------------------------------------------------------------------------------------------------        
+#-------------------------------------------------------------------------------------------------------------------#
 def display_log():
     """
     Goal: print all key/value pairs stored in the json log file.
@@ -83,13 +86,13 @@ def display_log():
 
     :return: none.
     """
-    log_file = 'MatthieuMayer/passwords/log.json'           #!! path must be redefined to local file !!
+    log_file = 'MatthieuMayer/passwords/log.json'           # !! path must be redefined to local directory !!
     with open(log_file, 'r') as file:
         dict_log = json.load(file)
         for k, v in dict_log.items():
             print(k, ':', v)
 
-#-------------------------------------------------------------------------------------------------------------------      
+#-------------------------------------------------------------------------------------------------------------------#    
 def num_to_alpha(x):
     """
     Goal: convert any number looping on a 26 digits base in its alphabetic analog (e.g. 1 = 'a', 13 = 'm', 28 = 'b').
@@ -114,7 +117,7 @@ def num_to_alpha(x):
 
     return dict_conv[x]
 
-#-------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------#
 def alpha_to_num(s):
     """
     Goal: convert any alphabetic character in its numerical analog (e.g. 'a' = 1, 'm' = 13).
@@ -138,7 +141,7 @@ def alpha_to_num(s):
 
     return dict_conv[s]
 
-#-------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------#
 def create_password(seed):
     """
     Goal: create a password specific to the seed passed as a parameter.
@@ -166,8 +169,9 @@ def create_password(seed):
 
     return password             
 
-####################################################################################################################
+#####################################################################################################################
 
+#---Main script-----------------------------------------------------------------------------------------------------#
 def main():
     root = args.url
     seed = url_strip(root)
@@ -175,11 +179,13 @@ def main():
     password = create_password(seed)
     os.system("echo '%s' | pbcopy" % password)
     
+    #---Optional command-line arguments-----------------------------------------------------------------------------#
     if args.print:
     print('\n', password, '\n')
 
     if args.log:
-        cfc.display_log()
+        display_log()
         print('\n')
 
+#---Call main()-----------------------------------------------------------------------------------------------------#
 main()
