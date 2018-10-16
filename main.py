@@ -1,3 +1,8 @@
+#####################################################################################################################
+#       NOTE: all defined functions and the main() function are presented in the same file (main.py) to avoid       #
+#             switching from one file to another when exploring the code.                                           #
+#####################################################################################################################
+
 import argparse
 import os
 import csv
@@ -33,8 +38,9 @@ def url_strip(root):
         pref = '//'
     if pref in root:
         root = root.split(pref)[1]
-
-    with open('MatthieuMAYER/passwords/domain_list.csv', 'r') as file:
+    
+    domain_file = 'MatthieuMAYER/passwords/domain_list.csv'     #!! path must be redefined to local file !!
+    with open(domain_file, 'r') as file:  
         reader = csv.reader(file)
         for row in reader:
             if row[0] in root:
@@ -60,7 +66,7 @@ def save_log(seed):
 
     :return: none.
     """
-    log_file = 'MatthieuMayer/passwords/log.json'
+    log_file = 'MatthieuMayer/passwords/log.json'             #!! path must be redefined to local file !!
     with open(log_file, 'r') as file:
         dict_log = json.load(file)
         dict_log[seed] = str(datetime.datetime.now())
@@ -79,7 +85,7 @@ def display_log():
 
     :return: none.
     """
-    log_file = 'MatthieuMayer/passwords/log.json'
+    log_file = 'MatthieuMayer/passwords/log.json'           #!! path must be redefined to local file !!
     with open(log_file, 'r') as file:
         dict_log = json.load(file)
         for k, v in dict_log.items():
